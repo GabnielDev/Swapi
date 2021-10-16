@@ -1,5 +1,6 @@
 package com.example.swapi
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -33,6 +34,7 @@ class PeopleActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setAdapter() {
         peopleAdapter = PeopleAdapter()
         peopleAdapter.notifyDataSetChanged()
@@ -53,10 +55,17 @@ class PeopleActivity : AppCompatActivity() {
     }
 
     fun getPeoples() {
-        mainViewModel.getPeople().observe(this, {
-            peopleAdapter.setData(it)
+
+
+        mainViewModel.getPeopleObserver().observe(this, {
+            peopleAdapter.setData(it.results)
         })
         mainViewModel.getPeople()
+
+//        mainViewModel.getPeople().observe(this, {
+//            peopleAdapter.setData(it)
+//        })
+//        mainViewModel.getPeople()
     }
 
     fun getNoSignal() {

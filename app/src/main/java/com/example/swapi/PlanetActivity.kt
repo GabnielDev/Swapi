@@ -3,10 +3,8 @@ package com.example.swapi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.swapi.adapter.PlanetAdapter
 import com.example.swapi.data.Planets
 import com.example.swapi.databinding.ActivityPlanetBinding
@@ -32,7 +30,6 @@ class PlanetActivity : AppCompatActivity() {
         setAdapter()
         setViewModel()
         getData()
-        getNoSignal()
 
 
     }
@@ -62,17 +59,6 @@ class PlanetActivity : AppCompatActivity() {
             planetAdapter.setData(it)
         })
         mainViewModel.getPlanet()
-
-    }
-
-    fun getNoSignal() {
-        mainViewModel.getNoSignal().observe(this, {
-            if (!it.isNullOrEmpty()) binding.lineNodata.visibility = View.VISIBLE
-            binding.rvPlanet.visibility = View.GONE
-
-            if (it.isNullOrEmpty()) binding.lineNodata.visibility = View.GONE
-
-        })
     }
 
     fun getLoading() {
@@ -85,7 +71,12 @@ class PlanetActivity : AppCompatActivity() {
         mainViewModel.getStatus().observe(this, {
             if (it >= 400) binding.lineNodata.visibility = View.GONE
         })
+        mainViewModel.getMessage().observe(this, {
+            if (!it.isNullOrEmpty()) binding.lineNodata.visibility = View.VISIBLE
+            binding.rvPlanet.visibility = View.GONE
 
+            if (it.isNullOrEmpty()) binding.lineNodata.visibility = View.GONE
+        })
     }
 
 }

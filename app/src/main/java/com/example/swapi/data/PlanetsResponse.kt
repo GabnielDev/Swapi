@@ -10,6 +10,5 @@ data class PlanetsResponse(
     val next: String,
     @SerializedName("previous")
     val previous: Any,
-    @SerializedName("results")
-    val planets: ArrayList<Planets>
+    val results: ArrayList<Planets>
 )

@@ -11,6 +11,7 @@ class PeopleAdapter: RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
     private val listData = arrayListOf<People>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(list: MutableList<People>) {
         listData.clear()
         listData.addAll(list)
